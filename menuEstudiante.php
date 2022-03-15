@@ -21,12 +21,15 @@
             }
 
             body{
-                margin: 20px 40px;
+                padding: 20px 40px;
+                max-width: 800px;
+                margin: 0px auto;
             }
 
             .menu{
                 border: 2px solid;
                 margin-top: 20px;
+                margin-bottom: 10px;
             }
 
             .menu form{
@@ -41,9 +44,20 @@
             #cerrar-sesion{
                 text-decoration: underline;
                 font-size: small;
-                margin-top: 10px;
                 cursor: pointer;
                 color: blue;
+            }
+
+            table{
+                width: 100%;
+                text-align: center;
+                border: 2px solid;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+
+            th, tr, td{
+                border: 2px solid black;
             }
         </style>
     </head>
@@ -67,7 +81,7 @@
                 <button name="boton" value="calificacion" type="submit">Consultar calificaciones</button>
             </form>
         </div>
-        <p id="cerrar-sesion">Cerrar sesion</p>
+        <a href="./index.php" id="cerrar-sesion">Cerrar sesion</a>
         <br>
         <?php
             if($_POST){
@@ -75,24 +89,33 @@
                     echo 'Examen';
                 }
                 elseif($_POST["boton"] == 'calificacion'){
-                    $consulta = mysqli_query($conexion, "SELECT * FROM calificacion WHERE id_usuario = '".$id_usuario."'");
+                    $consulta = mysqli_query($conexion, "SELECT * FROM calificacion WHERE id_alumno = '".$id_usuario."'");
                     $rows = mysqli_num_rows($consulta);
-                    echo "<table>
-                        <tr>
-                            <th>Examen</th>
-                            <th>Calificacion</th>
-                        </tr>
-                    ";
-                    for($i=0; $i<=$rows; $i++){
-                        $res = mysqli_fetch_array($consulta);
+                    echo "<table>";
                         echo "<tr>";
-                            echo "<td>" .$res['id_examen'];
-                            echo "<td>" .$res['calificacion'];
+                            echo '<th style="width:80%">Examen</th>';
+                            echo "<th>Calificacion</th>";
+                        echo "</tr>";
+                    for($i=0; $i<$rows; $i++){
+                        $res = mysqli_fetch_array($consulta);
+                        //Conseguir nombre examen
+                        $queryNomExam = mysqli_query($conexion, "SELECT nombre_examen FROM examen WHERE id_examen = '".$res['id_examen']."'");
+                        $nomExam = mysqli_fetch_array($queryNomExam);
+                        //Construccion tabla calificaciones
+                        echo "<tr>";
+                            echo "<td>" .$nomExam['nombre_examen'];
+                            if($res['calificacion'] >= 5){
+                                echo '<td style="color:#34B233; font-weight:bold; background-color: #ffffe4;">' .$res['calificacion'];
+                            }
+                            else{
+                                echo '<td style="color:#FF0000; font-weight:bold; background-color: #ffffe4;">' .$res['calificacion'];
+                            }
                         echo "</tr>";
                     }
                     echo "</table>";
                 }
-            }  
+            }
+            mysqli_close($conexion);
         ?>
     </body>
 </html>
