@@ -105,10 +105,10 @@
                         echo "<tr>";
                             echo "<td>" .$nomExam['nombre_examen'];
                             if($res['calificacion'] >= 5){
-                                echo '<td style="color:#34B233; font-weight:bold; background-color: #ffffe4;">' .$res['calificacion'];
+                                echo '<td style="color:#34B233; font-weight:bold; background-color: #34B23333;">' .$res['calificacion'];
                             }
                             else{
-                                echo '<td style="color:#FF0000; font-weight:bold; background-color: #ffffe4;">' .$res['calificacion'];
+                                echo '<td style="color:#FF0000; font-weight:bold; background-color: #FF000055;">' .$res['calificacion'];
                             }
                         echo "</tr>";
                     }
