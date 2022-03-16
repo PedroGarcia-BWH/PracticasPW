@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-03-2022 a las 17:03:07
+-- Tiempo de generación: 16-03-2022 a las 08:47:23
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -33,6 +33,14 @@ CREATE TABLE `alumno` (
   `id_asignatura` tinyint(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `alumno`
+--
+
+INSERT INTO `alumno` (`id_alumno`, `id_usuario`, `id_asignatura`) VALUES
+(1, 1, 1),
+(2, 1, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -51,8 +59,8 @@ CREATE TABLE `asignatura` (
 --
 
 INSERT INTO `asignatura` (`id_asig`, `id_profesor`, `nombre_asig`, `id_grado`) VALUES
-(2, 1, 'Calculo', 1),
-(3, 1, 'Algebra', 1);
+(1, 1, 'POO', 1),
+(2, 2, 'PW', 1);
 
 -- --------------------------------------------------------
 
@@ -84,6 +92,14 @@ CREATE TABLE `calificacion` (
   `calificacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `calificacion`
+--
+
+INSERT INTO `calificacion` (`id_calificacion`, `id_alumno`, `id_examen`, `calificacion`) VALUES
+(1, 1, 1, 8),
+(2, 1, 3, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -110,9 +126,18 @@ INSERT INTO `centro` (`id_centro`, `nombre_centro`) VALUES
 
 CREATE TABLE `examen` (
   `id_examen` tinyint(3) UNSIGNED NOT NULL,
-  `nombre_examen` int(11) NOT NULL,
+  `nombre_examen` varchar(20) NOT NULL,
   `id_tema` tinyint(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `examen`
+--
+
+INSERT INTO `examen` (`id_examen`, `nombre_examen`, `id_tema`) VALUES
+(1, 'Clases y Objetos', 1),
+(2, 'Administrador Web', 3),
+(3, 'Laravel', 4);
 
 -- --------------------------------------------------------
 
@@ -131,7 +156,7 @@ CREATE TABLE `grado` (
 --
 
 INSERT INTO `grado` (`id_grado`, `id_centro`, `nombre_grado`) VALUES
-(1, 1, 'Ingenieria Informatica');
+(1, 1, 'Informatica');
 
 -- --------------------------------------------------------
 
@@ -149,7 +174,8 @@ CREATE TABLE `profesor` (
 --
 
 INSERT INTO `profesor` (`id_profesor`, `id_usuario`) VALUES
-(1, 1);
+(1, 2),
+(2, 3);
 
 -- --------------------------------------------------------
 
@@ -168,9 +194,10 @@ CREATE TABLE `tema` (
 --
 
 INSERT INTO `tema` (`id_tema`, `nombre_tema`, `id_asignatura`) VALUES
-(1, 'Derivadas', 2),
-(2, 'Integrales', 2),
-(3, 'Matrices', 3);
+(1, 'Paradigma de la POO', 1),
+(2, 'Polimorfismo', 1),
+(3, 'Introduccion PHP', 2),
+(4, 'Frameworks', 2);
 
 -- --------------------------------------------------------
 
@@ -191,7 +218,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellido`, `dni`, `tipo`) VALUES
-(1, 'Antonio', 'Sala', '49234932', 0);
+(1, 'Jose', 'Bautista Lazar', '58574796Y', 1),
+(2, 'Nicolas', 'Priego Cadenas', '94493273G', 2),
+(3, 'Laura', 'Muriel Arcos', '40714384Z', 2);
 
 --
 -- Índices para tablas volcadas
@@ -276,13 +305,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `id_alumno` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_alumno` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `asignatura`
 --
 ALTER TABLE `asignatura`
-  MODIFY `id_asig` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_asig` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `bateriapreguntas`
@@ -294,7 +323,7 @@ ALTER TABLE `bateriapreguntas`
 -- AUTO_INCREMENT de la tabla `calificacion`
 --
 ALTER TABLE `calificacion`
-  MODIFY `id_calificacion` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_calificacion` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `centro`
@@ -306,7 +335,7 @@ ALTER TABLE `centro`
 -- AUTO_INCREMENT de la tabla `examen`
 --
 ALTER TABLE `examen`
-  MODIFY `id_examen` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_examen` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `grado`
@@ -318,19 +347,19 @@ ALTER TABLE `grado`
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
-  MODIFY `id_profesor` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_profesor` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tema`
 --
 ALTER TABLE `tema`
-  MODIFY `id_tema` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_tema` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
