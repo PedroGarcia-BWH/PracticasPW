@@ -86,7 +86,33 @@
         <?php
             if($_POST){
                 if($_POST["boton"] == 'examen'){
-                    echo 'Examen';
+                    $fechaActual = date('Y-m-d');
+                    $consulta = mysqli_query($conexion, "SELECT * FROM examen WHERE fecha >= '".$fechaActual."' ");
+                    $rows = mysqli_num_rows($consulta);
+
+                    if($rows == 1){
+                        echo '<div style="margin-top: 20px" >Se ha encontrado los siguientes examenes pendientes: </div>';
+                    }
+                    
+                    echo "<table style>";
+                    echo "<tr>";
+                        echo "<th>Examen";
+                        echo "<th>Fecha";
+                        echo "<th>Disponibilidad";
+                    for($i = 0; $i<$rows; $i++){
+                        $examen = mysqli_fetch_array($consulta);
+                        echo "<tr>";
+                            echo "<td>".$examen['nombre_examen'];
+                            if($examen['fecha'] == $fechaActual){
+                                echo '<td style="background-color:#FF000055; color:#FF0000; width: 20%;">'.$examen['fecha'];
+                                echo '<td style="width:20%;"><button name="examen" value='.$examen['id_examen'].'; style="width:100%; ; border:0px; text-decoration:underline; color:blue; cursor:pointer">Realizar</button>';
+                            }
+                            else{
+                                echo "<td>".$examen['fecha'];
+                                echo '<td style="width:20%;"><button name="examen" value='.$examen['id_examen'].'; style="width:100%; ; border:0px; cursor:default; color: gray;">No disponible</button>';
+                            }
+                    }
+                    echo "</table>";
                 }
                 elseif($_POST["boton"] == 'calificacion'){
                     $consulta = mysqli_query($conexion, "SELECT * FROM calificacion WHERE id_alumno = '".$id_usuario."'");
