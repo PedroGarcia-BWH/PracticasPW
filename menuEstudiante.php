@@ -13,10 +13,27 @@
                 height: fit-content;
             }
 
+            h2{
+                background-color: lightgray;
+                padding: 5px;
+                padding-left: 10px;
+                border-radius: 5px;
+            }
+
+            #head{
+                height: fit-content;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            #head h3{
+                margin: 0;
+            }
+
             #title{
                 text-align: center;
                 border: 2px solid;
-                background-color: lightgray;
+                background-color: #97CAEF;
                 font-size: larger;
             }
 
@@ -42,18 +59,21 @@
             }
 
             #cerrar-sesion{
+                height: fit-content;
                 text-decoration: underline;
                 font-size: small;
                 cursor: pointer;
                 color: blue;
+                margin: auto 1px;
             }
 
             table{
-                width: 100%;
+                width: calc(100% - 20px);
                 text-align: center;
                 border: 2px solid;
                 border-collapse: collapse;
-                margin-top: 20px;
+                margin: 0 auto;
+                margin-top: 10px;
             }
 
             th, tr, td{
@@ -72,16 +92,20 @@
 
             $nombre = $consulta['nombre'];
             $apellido = $consulta['apellido'];
+            echo '<div id="head">';
             echo '<h3>Bienvenido, '.$nombre .' '. $apellido;
+            echo '</h3>';
+            echo '<a href="./index.php" id="cerrar-sesion">Cerrar sesion</a>';
+            echo '</div>'
         ?>
         <div class="menu">
             <h2 id="title">MENU ESTUDIANTE</h2>
             <form method="POST">
                 <button name="boton" value="examen" type="submit">Realizar examen</button>
                 <button name="boton" value="calificacion" type="submit">Consultar calificaciones</button>
+                <button name="boton" value="revision" type="submit">Revisiones</button>
             </form>
         </div>
-        <a href="./index.php" id="cerrar-sesion">Cerrar sesion</a>
         <br>
         <?php
             if($_POST){
@@ -93,7 +117,7 @@
                     if($rows == 1){
                         echo '<div style="margin-top: 20px" >Se ha encontrado los siguientes examenes pendientes: </div>';
                     }
-                    
+                    echo '<h2>Examenes</h2>';
                     echo "<table style>";
                     echo "<tr>";
                         echo "<th>Examen";
@@ -104,19 +128,22 @@
                         echo "<tr>";
                             echo "<td>".$examen['nombre_examen'];
                             if($examen['fecha'] == $fechaActual){
-                                echo '<td style="background-color:#FF000055; color:#FF0000; width: 20%;">'.$examen['fecha'];
-                                echo '<td style="width:20%;"><button name="examen" value='.$examen['id_examen'].'; style="width:100%; ; border:0px; text-decoration:underline; color:blue; cursor:pointer">Realizar</button>';
+                                echo '<form action="examen.php" method="POST">';
+                                echo '<td style="background-color:#34B23333; color:#34B233; width: 20%;">'.$examen['fecha'];
+                                echo '<td style="width:20%;"><button name="boton" value='.$examen['id_examen'].' type="submit" style="width:100%; border:0px; text-decoration:underline; color:blue; cursor:pointer">Realizar</button>';
+                                echo '</form>';
                             }
                             else{
                                 echo "<td>".$examen['fecha'];
-                                echo '<td style="width:20%;"><button name="examen" value='.$examen['id_examen'].'; style="width:100%; ; border:0px; cursor:default; color: gray;">No disponible</button>';
+                                echo '<td style="width:20%;"><button style="width:100%; border:0px; cursor:default; color: gray;">No disponible</button>';
                             }
-                    }
+                    }      
                     echo "</table>";
                 }
                 elseif($_POST["boton"] == 'calificacion'){
                     $consulta = mysqli_query($conexion, "SELECT * FROM calificacion WHERE id_alumno = '".$id_usuario."'");
                     $rows = mysqli_num_rows($consulta);
+                    echo '<h2>Calificaciones</h2>';
                     echo "<table>";
                         echo "<tr>";
                             echo '<th style="width:80%">Examen</th>';
@@ -139,6 +166,13 @@
                         echo "</tr>";
                     }
                     echo "</table>";
+                }
+                elseif($_POST["boton"] == 'revision'){
+                    echo '<h2>Revisiones</h4>';
+                    //TODO - Menu revisiones
+                }
+                else{
+                    header('Location: ./examen.php');
                 }
             }
             mysqli_close($conexion);
