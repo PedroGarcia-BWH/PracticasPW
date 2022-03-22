@@ -96,7 +96,7 @@
             echo '<h3>Bienvenido, '.$nombre .' '. $apellido;
             echo '</h3>';
             echo '<a href="./index.php" id="cerrar-sesion">Cerrar sesion</a>';
-            echo '</div>'
+            echo '</div>';
         ?>
         <div class="menu">
             <h2 id="title">MENU ESTUDIANTE</h2>
