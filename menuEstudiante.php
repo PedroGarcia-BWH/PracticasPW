@@ -125,8 +125,10 @@
                         echo "<th>Disponibilidad";
                     for($i = 0; $i<$rows; $i++){
                         $examen = mysqli_fetch_array($consulta);
+                        $queryNomTema = mysqli_query($conexion, "SELECT nombre_tema FROM tema WHERE id_tema IN (SELECT id_tema FROM examen WHERE id_examen = '".$examen['id_examen']."')");
+                        $nomTema = mysqli_fetch_array($queryNomTema);
                         echo "<tr>";
-                            echo "<td>".$examen['nombre_examen'];
+                            echo "<td>".$nomTema['nombre_tema'];
                             if($examen['fecha'] == $fechaActual){
                                 echo '<form action="examen.php" method="POST">';
                                 echo '<td style="background-color:#34B23333; color:#34B233; width: 20%;">'.$examen['fecha'];
@@ -141,7 +143,7 @@
                     echo "</table>";
                 }
                 elseif($_POST["boton"] == 'calificacion'){
-                    $consulta = mysqli_query($conexion, "SELECT * FROM calificacion WHERE id_alumno = '".$id_usuario."'");
+                    $consulta = mysqli_query($conexion, "SELECT * FROM examen WHERE id_alumno = '".$id_usuario."'");
                     $rows = mysqli_num_rows($consulta);
                     echo '<h2>Calificaciones</h2>';
                     echo "<table>";
@@ -152,11 +154,11 @@
                     for($i=0; $i<$rows; $i++){
                         $res = mysqli_fetch_array($consulta);
                         //Conseguir nombre examen
-                        $queryNomExam = mysqli_query($conexion, "SELECT nombre_examen FROM examen WHERE id_examen = '".$res['id_examen']."'");
+                        $queryNomExam = mysqli_query($conexion, "SELECT nombre_tema FROM tema WHERE id_tema IN (SELECT id_tema FROM examen WHERE id_examen = '".$res['id_examen']."')");
                         $nomExam = mysqli_fetch_array($queryNomExam);
                         //Construccion tabla calificaciones
                         echo "<tr>";
-                            echo "<td>" .$nomExam['nombre_examen'];
+                            echo "<td>" .$nomExam['nombre_tema'];
                             if($res['calificacion'] >= 5){
                                 echo '<td style="color:#34B233; font-weight:bold; background-color: #34B23333;">' .$res['calificacion'];
                             }

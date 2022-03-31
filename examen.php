@@ -58,48 +58,58 @@
     <body>
         
         <?php
-            if($_SERVER["REQUEST_METHOD"] == "POST"){
-                echo '<h1 id="title">Examen ';
-                $conexion = mysqli_connect("127.0.0.1", "root", "", "bduca");
-                $consulta = mysqli_query($conexion, "SELECT * FROM examen WHERE id_examen >= '".$_POST['boton']."' ");
-                $examen = mysqli_fetch_array($consulta);
-                $id_tema = $examen['id_tema'];
+            echo '<h1 id="title">Examen ';
+            $conexion = mysqli_connect("127.0.0.1", "root", "", "bduca");
+            $consulta = mysqli_query($conexion, "SELECT * FROM examen WHERE id_examen = '".$_POST['boton']."' ");
+            $examen = mysqli_fetch_array($consulta);
+            $id_tema = $examen['id_tema'];
+
+            /* Comprobar si  */
 
 
-                /* Creacion del examen */
-
+            /* Creacion del examen */
+            //TODO - Guardar la generacion del examen en la base de datos
+            if(!isset($_SESSION['id_examen'])){
                 $consultaPreguntas = mysqli_query($conexion, "SELECT * FROM bateriapreguntas WHERE id_tema = '".$id_tema."'");
                 $nPreguntas = mysqli_num_rows($consultaPreguntas);
-                for($i = 0; $i < $nPreguntas; $i++){
+                for($i = 1; $i < $nPreguntas; $i++){
                     $preguntas[$i] = mysqli_fetch_array($consultaPreguntas);
                 }
 
                 $preguntasExamenLocal = [];
                 for($numeroPreguntasExamenLocal = 1; $numeroPreguntasExamenLocal <= 2; $numeroPreguntasExamenLocal++){
                     do{
-                        $n = rand(0, $nPreguntas);
+                        $n = rand(1, $nPreguntas);
                     }while(in_array($n, $preguntasExamenLocal));
                     array_push($preguntasExamenLocal, $n);
+                    $query_examenBD = mysqli_query($conexion, "INSERT INTO preguntaexamen (id_examen, id_pregunta) VALUES (".$examen['id_examen'].", $n)");
+                    $_SESSION['id_examen'] = $examen['id_examen']; 
                 }
-                $_POST['pregunta'] = 1;
-
-                echo $examen['nombre_examen'];
+                
+                //Guardar examen en la base de datos 
+            }
+            if(isset($_SESSION['id_examen'])){
+                $queryTema = mysqli_query($conexion, "SELECT * FROM tema WHERE id_tema IN (SELECT id_tema FROM examen WHERE id_examen = '".$_SESSION['id_examen']."' )");
+                $tema = mysqli_fetch_array($queryTema);
+                echo $tema['nombre_tema'];
                 echo '</h1>';
                 echo '<div class="cuestionario">';
-                   if($_POST){
-                    echo '<h4 class="pregunta">Pregunta 1 -'.$preguntas[$_POST['pregunta']]['pregunta'].'</h4>';
+
+                //Recoger examen de la base de datos
+                $queryIdPreguntas = mysqli_query($conexion, "SELECT * FROM preguntaexamen WHERE id_examen = '".$_SESSION['id_examen']."'");
+                $numPreguntas = mysqli_num_rows($queryIdPreguntas);
+                for($i=0; $i<$numPreguntas; $i++){
+                    $Idpregunta = mysqli_fetch_array($queryIdPreguntas);
+                    $queryPreguntas = mysqli_query($conexion, "SELECT * FROM bateriapreguntas WHERE id_pregunta = '".$Idpregunta['id_pregunta']."'");
+                    $pregunta = mysqli_fetch_array($queryPreguntas);
+                    echo '<h4 class="pregunta">Pregunta '.$i.' -'.$pregunta['pregunta'].'</h4>';
                     echo '<form method="POST">';
                         for($i=1; $i<=4; $i++){
-                            echo '<div class="opcion"><input type="radio" name="respuesta" value="'.$i.'">'.$preguntas[$_POST['pregunta']]['opcion'.$i.''].'</div>';
+                            echo '<div class="opcion"><input type="radio" name="respuesta" value="'.$i.'">'.$pregunta['opcion'."$i".''].'</div>';
                         }
-                        echo '<button name="pregunta" value="'.(string)($_POST['pregunta']+1).'" type="submit">Siguiente pregunta</button>';
+                }
                     echo '</form>';
-                   }
                 echo '</div>';
-            }
-            else{
-                echo '<h4>ERROR 300</h4>';
-                echo '<p>No se ha encontrado ninguna opcion de carga valida</p>';
             }
         ?>
 
