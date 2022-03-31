@@ -13,7 +13,7 @@
                 height: fit-content;
             }
 
-            h2{
+            h4{
                 background-color: lightgray;
                 padding: 5px;
                 padding-left: 10px;
@@ -76,22 +76,24 @@
                 margin-top: 10px;
             }
 
+            .boton{
+                margin-top: 20px;
+            }
+
             th, tr, td{
                 border: 2px solid black;
-            }
-            .textbox{
-                width:50%;
             }
         </style>
     </head>
             
     <body>
-        <h1>Gestión de preguntas para Examenes<h1>
-        <br><form method="post">Seleccione la acción que desea hacer<br>
+        <h1>Gestión de preguntas para exámenes</h1>
+        <br><form method="post">
+        <h4>Seleccione la acción que desea hacer:</h4>
         <input name="accion" type="radio" value = "create"  />Crear<br>
         <input name="accion" type ="radio" value="modify" />Modificar<br>
         <input name="accion" type ="radio" value="delete" />Eliminar<br>
-        <input type="submit" value= "enviar">
+        <input class="boton" type="submit" value= "enviar">
         <form>
 
         <?php
@@ -104,7 +106,7 @@
             
             if($_POST['accion'] == "delete")
             {
-                echo "<br /> Seleccione la pregunta a eliminar: <br />";
+                echo "<br><h4>Seleccione la pregunta a eliminar:</h4>";
                 $consulta = mysqli_query($enlace, "select * from bateriapreguntas where id_tema = 4  ");
                 
                 $nfilas = mysqli_num_rows ($consulta);
@@ -112,10 +114,10 @@
                 for ($i=0; $i<$nfilas; $i++)
                 {
                     $fila = mysqli_fetch_array ($consulta);
-                    echo "<br>";
                     $pregunta = $fila["pregunta"];
                     $id = $fila["id_pregunta"];
                     echo "<input name='selPreguntaErase' type='radio' value = $id />$pregunta";
+                    echo "<br>";
                 }
                 echo "<br>";
                 echo "<input type='submit' value= 'Aceptar'>";
@@ -129,19 +131,19 @@
                 echo "<br><input class='textbox' type='text' name='pregunta'><br>";
                     
                 echo "<br><form method='post'><br>";
-                echo "<br>Seleccione la respuesta correcta y seleccione enviar una vez introducido los datos:<br>";
+                echo "<br><h2>Seleccione la respuesta correcta y seleccione enviar una vez introducido los datos:</h2><br>";
                 echo "<br /><input name='correcta' type='radio' value = '1' checked='checked' />Respuesta 1 =
                 <input class='textbox' type='text' name='respuesta1'><br />";
                 echo "<br><input name='correcta' type ='radio' value='2' />Respuesta 2 = <input class='textbox' type='text' name='respuesta2'><br>";
                 echo "<br><input name='correcta' type ='radio' value='3' />Respuesta 3 =<input class='textbox' type='text' name='respuesta3'><br>";
                 echo "<br><input name='correcta' type ='radio' value='4' />Respuesta 4 =<input class='textbox' type='text' name='respuesta4'><br>";
-                echo "<input type='submit' value= 'enviar'>";
+                echo "<input class='boton' type='submit' value= 'enviar'>";
                 echo "<form>";     
             }
         
             if($_POST['accion'] == "modify")
             {
-                echo "<br /> Seleccione la pregunta: <br />";
+                echo "<br><h4>Seleccione la pregunta:</h4>";
                 $consulta = mysqli_query($enlace, "select * from bateriapreguntas where id_tema = 4  ");
                 
                 $nfilas = mysqli_num_rows ($consulta);
@@ -149,13 +151,12 @@
                 for ($i=0; $i<$nfilas; $i++)
                 {
                     $fila = mysqli_fetch_array ($consulta);
-                    echo "<br>";
                     $pregunta = $fila["pregunta"];
                     $id = $fila["id_pregunta"];
                     echo "<input name='selPregunta' type='radio' value = $id />$pregunta";
+                    echo "<br>";
                 }
-                echo "<br>";
-                echo "<input type='submit' value= 'Aceptar'>";
+                echo "<input class='boton' type='submit' value= 'Aceptar'>";
                 echo "<form>";            
             }         
         }
@@ -196,17 +197,17 @@
                     $pregunta = $fila['pregunta']; $p1 =  $fila['opcion1']; $p2 = $fila['opcion2']; $p3 = $fila['opcion3']; $p4 = $fila['opcion4'];
                     $ok = setcookie("id_pregunta", $selpregunta);
                     $ok = setcookie("correcta",$fila['correcta']);
-                    echo "Selecciona que quiere modificar";
+                    echo "<h4>Selecciona que quiere modificar</h4>";
                     echo "<form method='post'>"; 
-                    echo "<br> <input name='selMod' type='radio' value = 'pregunta' />Pregunta:  $pregunta <br>";
-                    echo "<br> <input name='selMod' type='radio' value = 'opcion1' />Respuesta 1: $p1 <br>";
-                    echo "<br> <input name='selMod' type='radio' value = 'opcion2' />Respuesta 2: $p2  <br>";
-                    echo "<br> <input name='selMod' type='radio' value = 'opcion3' />Respuesta 3: $p3 <br>";
-                    echo "<br> <input name='selMod' type='radio' value = 'opcion4' />Respuesta 4: $p4 <br>";
-                    echo"<br>Introduce la modificación:<br>";
+                    echo "<input name='selMod' type='radio' value = 'pregunta' />Pregunta:  $pregunta";
+                    echo "<br> <input name='selMod' type='radio' value = 'opcion1' />Respuesta 1: $p1";
+                    echo "<br> <input name='selMod' type='radio' value = 'opcion2' />Respuesta 2: $p2";
+                    echo "<br> <input name='selMod' type='radio' value = 'opcion3' />Respuesta 3: $p3";
+                    echo "<br> <input name='selMod' type='radio' value = 'opcion4' />Respuesta 4: $p4";
+                    echo"<br><br>Introduce la modificación:<br>";
                     echo "<br><input class='textbox' type='text' name='mod'><br>";
 
-                    echo "<input type='submit' value= 'Aceptar'>";
+                    echo "<input class='boton' type='submit' value= 'Aceptar'>";
                     echo "<form>";
                 }              
     ?>
