@@ -108,7 +108,7 @@
         </div>
         <br>
         <?php
-            if($_POST){
+            if(isset($_POST['boton'])){
                 if($_POST["boton"] == 'examen'){
                     $fechaActual = date('Y-m-d');
                     $consulta = mysqli_query($conexion, "SELECT * FROM examen e WHERE fecha >= CURRENT_DATE() AND (id_examen IN(SELECT id_examen FROM preguntaexamen WHERE respuesta IS NULL) OR NOT EXISTS (SELECT id_examen FROM preguntaexamen WHERE ".'e.id_examen'." = id_examen))");
@@ -172,7 +172,7 @@
                     echo "<table>";
                         echo "<tr>";
                             echo '<th style="width:80%">Examen</th>';
-                            echo "<th>Calificacion</th>";
+                            echo "<th>Revision</th>";
                         echo "</tr>";
                     for($i=0; $i<$rows; $i++){
                         $res = mysqli_fetch_array($consulta);
