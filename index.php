@@ -33,13 +33,3 @@
         </form>
     </body>
 </html>
-
-<FORM METHOD=POST>
-            Correo electrónico:
-            <INPUT NAME="correo" TYPE="text" SIZE=15 MAXLENGTH=100>
-            <br/>
-            Contraseña:
-            <INPUT NAME="passwd" TYPE="password" SIZE=15 MAXLENGTH=10>
-            <br/>
-            <INPUT TYPE="submit" VALUE="Iniciar sesión">
-        </FORM>
