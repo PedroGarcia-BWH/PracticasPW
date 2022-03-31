@@ -125,20 +125,18 @@
             } 
             if($_POST['accion'] == "create")
             {
-               
                 echo "<br>Introduzca la pregunta:<br>";
                 echo "<br><input class='textbox' type='text' name='pregunta'><br>";
                     
                 echo "<br><form method='post'><br>";
                 echo "<br>Seleccione la respuesta correcta y seleccione enviar una vez introducido los datos:<br>";
-                echo "<br /><input name='correcta' type='radio' value = 'opcion1' checked='checked' />Respuesta 1 =
+                echo "<br /><input name='correcta' type='radio' value = '1' checked='checked' />Respuesta 1 =
                 <input class='textbox' type='text' name='respuesta1'><br />";
-                echo "<br><input name='correcta' type ='radio' value='opcion2' />Respuesta 2 = <input class='textbox' type='text' name='respuesta2'><br>";
-                echo "<br><input name='correcta' type ='radio' value='opcion3' />Respuesta 3 =<input class='textbox' type='text' name='respuesta3'><br>";
-                echo "<br><input name='correcta' type ='radio' value='opcion4' />Respuesta 4 =<input class='textbox' type='text' name='respuesta4'><br>";
+                echo "<br><input name='correcta' type ='radio' value='2' />Respuesta 2 = <input class='textbox' type='text' name='respuesta2'><br>";
+                echo "<br><input name='correcta' type ='radio' value='3' />Respuesta 3 =<input class='textbox' type='text' name='respuesta3'><br>";
+                echo "<br><input name='correcta' type ='radio' value='4' />Respuesta 4 =<input class='textbox' type='text' name='respuesta4'><br>";
                 echo "<input type='submit' value= 'enviar'>";
-                echo "<form>";
-                       
+                echo "<form>";     
             }
         
             if($_POST['accion'] == "modify")
@@ -158,29 +156,28 @@
                 }
                 echo "<br>";
                 echo "<input type='submit' value= 'Aceptar'>";
-                echo "<form>";
-
-                  
-            }
-            
+                echo "<form>";            
+            }         
         }
-
             if(isset($_POST['selMod']))
             {
                 $selMod = $_POST['selMod'];
                 $mod = $_POST['mod'];
+                $id = $_COOKIE['id_pregunta'];
                 if($mod == $_COOKIE['correcta']){
-                    $nombre = mysqli_query($enlace, "update bateriapreguntas set $selMod = $mod, correcta = $mod where id_pregunta = $selPregunta "); //mirar esto
+                    $nombre = mysqli_query($enlace, "update bateriapreguntas set $selMod = ".$mod.", correcta = ".$mod." where id_pregunta = $id "); //mirar esto
                     header('Location: final.php');
                 }else{
-                    $nombre = mysqli_query($enlace, "update bateriapreguntas set $selMod = $mod, where id_pregunta = 2"); //mirar esto
+                    $nombre = mysqli_query($enlace, "update bateriapreguntas set $selMod = ".$mod." where id_pregunta = $id"); //mirar esto
                     header('Location: final.php');
                 }
             }
             if(isset($_POST['correcta']))
             {
                 $pregunta= $_POST['pregunta'];$respuesta1 =$_POST["respuesta1"];$respuesta2 =$_POST["respuesta2"];$respuesta3 =$_POST["respuesta3"];$respuesta4 =$_POST["respuesta4"];$correcta=$_POST["correcta"];
-                $nombre = mysqli_query($enlace, "insert into bateriapreguntas (id_tema, pregunta, opcion1, opcion2, opcion3, opcion4,correcta) values ('".$tema."','".$pregunta."'.,'".$respuesta1."','".$respuesta2."','".$respuesta3."','".$respuesta4."','".$correcta."')"); //mirar esto
+               
+                $nombre = mysqli_query($enlace, "insert into bateriapreguntas (id_tema, pregunta, opcion1, opcion2, opcion3, opcion4,correcta) values 
+                ($tema,'".$pregunta."','".$respuesta1."','".$respuesta2."','".$respuesta3."','".$respuesta4."','".$correcta."')"); //mirar esto
                 header('Location: final.php');
             }
             if(isset($_POST['selPreguntaErase'])){
@@ -197,6 +194,7 @@
                     $consulta = mysqli_query($enlace, "select * from bateriapreguntas where id_pregunta = $selpregunta ");
                     $fila = mysqli_fetch_array ($consulta);
                     $pregunta = $fila['pregunta']; $p1 =  $fila['opcion1']; $p2 = $fila['opcion2']; $p3 = $fila['opcion3']; $p4 = $fila['opcion4'];
+                    $ok = setcookie("id_pregunta", $selpregunta);
                     $ok = setcookie("correcta",$fila['correcta']);
                     echo "Selecciona que quiere modificar";
                     echo "<form method='post'>"; 
@@ -210,10 +208,7 @@
 
                     echo "<input type='submit' value= 'Aceptar'>";
                     echo "<form>";
-
-                
-                }
-                       
+                }              
     ?>
     <body>
 <html>
