@@ -111,12 +111,8 @@
             if($_POST){
                 if($_POST["boton"] == 'examen'){
                     $fechaActual = date('Y-m-d');
-                    $consulta = mysqli_query($conexion, "SELECT * FROM examen WHERE fecha >= '".$fechaActual."' ");
+                    $consulta = mysqli_query($conexion, "SELECT * FROM examen e WHERE fecha >= CURRENT_DATE() AND (id_examen IN(SELECT id_examen FROM preguntaexamen WHERE respuesta IS NULL) OR NOT EXISTS (SELECT id_examen FROM preguntaexamen WHERE ".'e.id_examen'." = id_examen))");
                     $rows = mysqli_num_rows($consulta);
-
-                    if($rows == 1){
-                        echo '<div style="margin-top: 20px" >Se ha encontrado los siguientes examenes pendientes: </div>';
-                    }
                     echo '<h2>Examenes</h2>';
                     echo "<table style>";
                     echo "<tr>";
@@ -143,7 +139,7 @@
                     echo "</table>";
                 }
                 elseif($_POST["boton"] == 'calificacion'){
-                    $consulta = mysqli_query($conexion, "SELECT * FROM examen WHERE id_alumno = '".$id_usuario."'");
+                    $consulta = mysqli_query($conexion, "SELECT * FROM examen WHERE id_alumno = '".$id_usuario."'AND calificacion IS NOT NULL");
                     $rows = mysqli_num_rows($consulta);
                     echo '<h2>Calificaciones</h2>';
                     echo "<table>";
@@ -170,11 +166,28 @@
                     echo "</table>";
                 }
                 elseif($_POST["boton"] == 'revision'){
-                    echo '<h2>Revisiones</h4>';
-                    //TODO - Menu revisiones
-                }
-                else{
-                    header('Location: ./examen.php');
+                    echo '<h2>Calificaciones</h2>';
+                    $consulta = mysqli_query($conexion, "SELECT * FROM examen WHERE id_alumno = '".$id_usuario."'AND calificacion IS NOT NULL");
+                    $rows = mysqli_num_rows($consulta);
+                    echo "<table>";
+                        echo "<tr>";
+                            echo '<th style="width:80%">Examen</th>';
+                            echo "<th>Calificacion</th>";
+                        echo "</tr>";
+                    for($i=0; $i<$rows; $i++){
+                        $res = mysqli_fetch_array($consulta);
+                        //Conseguir nombre examen
+                        $queryNomExam = mysqli_query($conexion, "SELECT nombre_tema FROM tema WHERE id_tema IN (SELECT id_tema FROM examen WHERE id_examen = '".$res['id_examen']."')");
+                        $nomExam = mysqli_fetch_array($queryNomExam);
+                        //Construccion tabla calificaciones
+                        echo "<tr>";
+                            echo "<td>" .$nomExam['nombre_tema'];
+                            echo '<form action="revision.php" method="POST">';
+                            echo '<td style="width:20%;"><button name="revision" value='.$res['id_examen'].' type="submit" style="width:100%; border:0px; text-decoration:underline; color:blue; cursor:pointer">Revisar</button>';
+                            echo '</form>';
+                        echo "</tr>";
+                    }
+                    echo "</table>";
                 }
             }
             mysqli_close($conexion);

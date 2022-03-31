@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-03-2022 a las 10:10:26
+-- Tiempo de generación: 31-03-2022 a las 10:51:30
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -71,7 +71,7 @@ INSERT INTO `asignatura` (`id_asig`, `id_profesor`, `nombre_asig`, `id_grado`) V
 CREATE TABLE `bateriapreguntas` (
   `id_pregunta` tinyint(3) UNSIGNED NOT NULL,
   `id_tema` tinyint(3) UNSIGNED NOT NULL,
-  `pregunta` varchar(50) NOT NULL,
+  `pregunta` varchar(200) NOT NULL,
   `opcion1` varchar(50) NOT NULL,
   `opcion2` varchar(50) NOT NULL,
   `opcion3` varchar(50) NOT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE `examen` (
   `id_examen` tinyint(3) UNSIGNED NOT NULL,
   `id_tema` tinyint(3) UNSIGNED NOT NULL,
   `id_alumno` tinyint(3) UNSIGNED NOT NULL,
-  `calificacion` float NOT NULL,
+  `calificacion` float DEFAULT NULL,
   `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -125,10 +125,10 @@ CREATE TABLE `examen` (
 --
 
 INSERT INTO `examen` (`id_examen`, `id_tema`, `id_alumno`, `calificacion`, `fecha`) VALUES
-(1, 1, 0, 0, '2022-03-15'),
-(2, 3, 0, 0, '2022-03-01'),
-(3, 2, 1, 7.5, '2022-03-29'),
-(4, 4, 1, 4, '2022-03-30');
+(1, 1, 1, 7.5, '2022-03-22'),
+(2, 3, 0, 4, '2022-03-15'),
+(3, 2, 1, NULL, '2022-03-31'),
+(4, 4, 1, NULL, '2022-04-01');
 
 -- --------------------------------------------------------
 
@@ -167,6 +167,7 @@ CREATE TABLE `preguntaexamen` (
 
 INSERT INTO `preguntaexamen` (`id_examen`, `id_pregunta`, `respuesta`) VALUES
 (4, 1, ''),
+(4, 2, ''),
 (4, 3, '');
 
 -- --------------------------------------------------------
