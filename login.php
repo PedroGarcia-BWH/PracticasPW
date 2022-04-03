@@ -65,11 +65,11 @@
                     switch($fila["tipo"]){
                         
                         case 1:
-
+                            header('Location: profesorado.php');
                             break;
                         
                         case 2:
-
+                            header('Location: menuEstudiante.php');
                             break;
 
                     }

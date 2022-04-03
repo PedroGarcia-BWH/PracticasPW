@@ -83,10 +83,11 @@
     </head>
 <body>
         <?php
+            session_start();
             //Conexion a base de datos
             $conexion = mysqli_connect("127.0.0.1", "root", "", "bduca");
-            //$id_usuario = $_SESSION['id_usuario'];
-            $id_usuario = 1;
+            $id_usuario = $_SESSION['id_usuario'];
+            //$id_usuario = 1;
             //Obtener nombre y apellidos del usuario
             $consulta = mysqli_query($conexion, "SELECT * FROM usuario WHERE id_usuario = '".$id_usuario."'");
             $consulta = mysqli_fetch_array($consulta);
@@ -96,7 +97,7 @@
             echo '<div id="head">';
             echo '<h3>Bienvenido, '.$nombre .' '. $apellido;
             echo '</h3>';
-            echo '<a href="./index.php" id="cerrar-sesion">Cerrar sesion</a>';
+            echo '<a href="login.php" id="cerrar-sesion">Cerrar sesion</a>';
             echo '</div>';
         ?>
     <h1> Zona de profesorado</h1>
@@ -124,7 +125,7 @@
                         echo "<br>";
                         $asig = $fila["nombre_asig"];
                         $id = $fila["id_asig"];
-                        echo "<input name='seleccion' type='radio' value = $id />$asig";
+                        echo "<input name='seleccion' type='radio' checked='checked'  value = $id />$asig";
                     }
                     echo "<br>";
                     echo "<input type='submit' value= 'Aceptar'>";
@@ -146,7 +147,7 @@
                         echo "<br>";
                         $asig = $fila["nombre_asig"];
                         $id = $fila["id_asig"];
-                        echo "<input name='seleccion' type='radio' value = $id />$asig";
+                        echo "<input name='seleccion' type='radio' checked='checked' value = $id />$asig";
                     }
                     echo "<br>";
                     echo "<input type='submit' value= 'Aceptar'>";

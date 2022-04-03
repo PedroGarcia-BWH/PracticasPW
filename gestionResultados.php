@@ -84,9 +84,13 @@
             }
         </style>
     </head>
-    <h1> RESULTADOS</h1>
-
+    
     <?php
+        echo '<div id="head">';
+        echo '<h3>RESULTADOS';
+        echo '</h3>';
+        echo '<a href="login.php" id="cerrar-sesion">Cerrar sesion</a>';
+        echo '</div>';
         $enlace = mysqli_connect("127.0.0.1","root","", "bduca");
         $tema = $_POST["tema"];
         //$tema = 1;
@@ -119,9 +123,12 @@
                 {
                     $ids = mysqli_query($enlace,"Select id_usuario from alumno where id_alumno =".$fila['id_alumno']);
                     $id =  mysqli_fetch_array ($ids);
-                    $nombres = mysqli_query($enlace,"Select nombre from usuario where id_usuario =".$id['id_usuario']);
+                    $nombres = mysqli_query($enlace,"Select nombre, apellido from usuario where id_usuario =".$id['id_usuario']);
                     $nombre = mysqli_fetch_array ($nombres);
-                    echo $nombre['nombre'];echo " <th>";
+                    echo $nombre['nombre'];
+                    echo " ";
+                    echo $nombre['apellido'];
+                    echo " <th>";
                     echo $fila['fecha'];echo "<th>";
                     echo $fila['calificacion']; echo "<th>";
                     //aqui se saca por pantalla toda la informacion
@@ -147,6 +154,10 @@
        mysqli_close($enlace);
 
     ?>
+    Pulse en continuar para volver al menu principal.
+    <form action = "profesorado.php" method = "get" >
+        <input type = "submit" value = "Continuar">
+    <form>
 <html>
 
 

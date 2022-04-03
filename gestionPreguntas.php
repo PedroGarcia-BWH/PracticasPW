@@ -87,10 +87,16 @@
     </head>
             
     <body>
-        <h1>Gestión de preguntas para exámenes</h1>
+        <?php
+            echo '<div id="head">';
+            echo '<h3>GESTION DE PREGUNTAS PARA EXAMENES';
+            echo '</h3>';
+            echo '<a href="login.php" id="cerrar-sesion">Cerrar sesion</a>';
+            echo '</div>';
+        ?>
         <br><form method="post">
         <h4>Seleccione la acción que desea hacer:</h4>
-        <input name="accion" type="radio" value = "create"  />Crear<br>
+        <input name="accion" type="radio"  checked='checked' value = "create"  />Crear<br>
         <input name="accion" type ="radio" value="modify" />Modificar<br>
         <input name="accion" type ="radio" value="delete" />Eliminar<br>
         <input class="boton" type="submit" value= "enviar">
@@ -116,7 +122,7 @@
                     $fila = mysqli_fetch_array ($consulta);
                     $pregunta = $fila["pregunta"];
                     $id = $fila["id_pregunta"];
-                    echo "<input name='selPreguntaErase' type='radio' value = $id />$pregunta";
+                    echo "<input name='selPreguntaErase' type='radio' checked='checked' value = $id />$pregunta";
                     echo "<br>";
                 }
                 echo "<br>";
@@ -153,7 +159,7 @@
                     $fila = mysqli_fetch_array ($consulta);
                     $pregunta = $fila["pregunta"];
                     $id = $fila["id_pregunta"];
-                    echo "<input name='selPregunta' type='radio' value = $id />$pregunta";
+                    echo "<input name='selPregunta' type='radio' checked='checked' value = $id />$pregunta";
                     echo "<br>";
                 }
                 echo "<input class='boton' type='submit' value= 'Aceptar'>";
@@ -165,13 +171,11 @@
                 $selMod = $_POST['selMod'];
                 $mod = $_POST['mod'];
                 $id = $_COOKIE['id_pregunta'];
-                if($mod == $_COOKIE['correcta']){
-                    $nombre = mysqli_query($enlace, "update bateriapreguntas set $selMod = ".$mod.", correcta = ".$mod." where id_pregunta = $id "); //mirar esto
-                    header('Location: final.php');
-                }else{
-                    $nombre = mysqli_query($enlace, "update bateriapreguntas set $selMod = ".$mod." where id_pregunta = $id"); //mirar esto
-                    header('Location: final.php');
-                }
+
+                echo "update bateriapreguntas set $selMod = ".$mod." where id_pregunta = $id";
+                $nombre = mysqli_query($enlace, "update bateriapreguntas set $selMod = '$mod' where id_pregunta = $id"); //mirar esto
+                header('Location: final.php');
+                
             }
             if(isset($_POST['correcta']))
             {
@@ -185,7 +189,7 @@
                 $selpregunta = $_POST['selPreguntaErase'];
                 
                 
-              // $nombre = mysqli_query($enlace, "delete from bateriapreguntas where id_pregunta =  $selpregunta"); //mirar esto
+               $nombre = mysqli_query($enlace, "delete from bateriapreguntas where id_pregunta =  $selpregunta"); //mirar esto
                header('Location: final.php');
             } 
 
@@ -200,7 +204,7 @@
                     echo "<h4>Selecciona que quiere modificar</h4>";
                     echo "<form method='post'>"; 
                     echo "<input name='selMod' type='radio' value = 'pregunta' />Pregunta:  $pregunta";
-                    echo "<br> <input name='selMod' type='radio' value = 'opcion1' />Respuesta 1: $p1";
+                    echo "<br> <input name='selMod' type='radio' checked='checked' value = 'opcion1' />Respuesta 1: $p1";
                     echo "<br> <input name='selMod' type='radio' value = 'opcion2' />Respuesta 2: $p2";
                     echo "<br> <input name='selMod' type='radio' value = 'opcion3' />Respuesta 3: $p3";
                     echo "<br> <input name='selMod' type='radio' value = 'opcion4' />Respuesta 4: $p4";

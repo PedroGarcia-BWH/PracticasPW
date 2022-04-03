@@ -98,7 +98,7 @@
             echo "<br>";
             $asig = $fila["nombre_tema"];
             $id = $fila["id_tema"];
-            echo "<input name='tema' type='radio' value = $id />$asig";
+            echo "<input name='tema' type='radio' checked='checked' value = $id />$asig";
         }
         echo "<br>";
         echo "<input type='submit' value= 'Aceptar'>";
