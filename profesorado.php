@@ -1,6 +1,6 @@
 <html>
 <head>
-        <title>Menu profesorado</title>
+        <title>Menú profesorado</title>
         <style type="text/css">
             *{
                 font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -102,7 +102,7 @@
         ?>
     <h1> Zona de profesorado</h1>
     <div class="menu">
-            <h2 id="title">MENU PROFESORADO</h2>
+            <h2 id="title">MENÚ PROFESORADO</h2>
             <form method="POST">
                 <button name="boton" value="preguntas" type="submit">Gestionar Preguntas</button>
                 <button name="boton" value="resultados" type="submit">Gestionar Resultados</button>

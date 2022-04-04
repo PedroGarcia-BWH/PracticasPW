@@ -1,6 +1,6 @@
 <html>
 <head>
-        <title>Resultados de examenes</title>
+        <title>Resultados de exámenes</title>
         <style type="text/css">
             *{
                 font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -89,7 +89,7 @@
         echo '<div id="head">';
         echo '<h3>RESULTADOS';
         echo '</h3>';
-        echo '<a href="index.php" id="cerrar-sesion">Cerrar sesion</a>';
+        echo '<a href="index.php" id="cerrar-sesion">Cerrar sesión</a>';
         echo '</div>';
         $enlace = mysqli_connect("127.0.0.1","root","", "bduca");
         $tema = $_POST["tema"];
@@ -154,7 +154,7 @@
        mysqli_close($enlace);
 
     ?>
-    Pulse en continuar para volver al menu principal.
+    Pulse en continuar para volver al menú principal.
     <form action = "profesorado.php" method = "get" >
         <input type = "submit" value = "Continuar">
     <form>

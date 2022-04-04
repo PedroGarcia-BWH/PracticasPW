@@ -1,6 +1,6 @@
 <html>
 <head>
-        <title>Menu profesorado</title>
+        <title>Menú profesorado</title>
         <style type="text/css">
             *{
                 font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -91,7 +91,7 @@
             echo '<div id="head">';
             echo '<h3>GESTION DE PREGUNTAS PARA EXAMENES';
             echo '</h3>';
-            echo '<a href="index.php" id="cerrar-sesion">Cerrar sesion</a>';
+            echo '<a href="index.php" id="cerrar-sesion">Cerrar sesión</a>';
             echo '</div>';
         ?>
         <br><form method="post">

@@ -1,7 +1,7 @@
 <html>
 
     <head>
-        <title>Sistema de Gestion de Examenes</title>
+        <title>Sistema de Gestión de Exámenes</title>
             <style type="text/css">
                 *{
                     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -26,7 +26,7 @@
     </head>
     <body>
         
-    <h1 STYLE="text-align: center;">Sistemas de Gestion Web de Exámenes</h1>
+    <h1 STYLE="text-align: center;">Sistemas de Gestión Web de Exámenes</h1>
         <hr>
         <form METHOD=POST STYLE="display: flex; height:fit-content; flex-direction:column; width:50%; margin:auto; max-width:500px">
             <h2 STYLE="text-align: center;">Iniciar Sesión</h2>
@@ -56,7 +56,7 @@
                 $nfilas = mysqli_num_rows($consulta);
                 mysqli_close($conexion);
 
-                if($nfilas == 1 && password_verify($passwd, $fila["passwd"])){ //Si solamente hay una coincidencia significa que el usuario existe y ha metido los datos correctamente.
+                if($nfilas == 1 && password_verify($passwd, $fila["passwd"])){
                     
                     $hash = password_hash($passwd, PASSWORD_DEFAULT, [10]);
                     session_start();

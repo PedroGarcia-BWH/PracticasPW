@@ -85,7 +85,7 @@
         </style>
     </head>
 
-    ACCIÓN REALIZADA CON ÉXITO, PULSE EN CONTINUAR PARA VOLVER AL MENU PRINCIPAL
+    ACCIÓN REALIZADA CON ÉXITO, PULSE EN CONTINUAR PARA VOLVER AL MENÚ PRINCIPAL
     <form action = profesorado.php method = 'get'>
 
     <input type='submit' value= 'Continuar'>

@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Menu estudiante</title>
+        <title>Menú estudiante</title>
         <style type="text/css">
             *{
                 font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -95,11 +95,11 @@
             echo '<div id="head">';
             echo '<h3>Bienvenido, '.$nombre .' '. $apellido;
             echo '</h3>';
-            echo '<a href="index.php" id="cerrar-sesion">Cerrar sesion</a>';
+            echo '<a href="index.php" id="cerrar-sesion">Cerrar sesión</a>';
             echo '</div>';
         ?>
         <div class="menu">
-            <h2 id="title">MENU ESTUDIANTE</h2>
+            <h2 id="title">MENÚ ESTUDIANTE</h2>
             <form method="POST">
                 <button name="boton" value="examen" type="submit">Realizar examen</button>
                 <button name="boton" value="calificacion" type="submit">Consultar calificaciones</button>
