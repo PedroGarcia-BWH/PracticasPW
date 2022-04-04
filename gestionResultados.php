@@ -89,7 +89,7 @@
         echo '<div id="head">';
         echo '<h3>RESULTADOS';
         echo '</h3>';
-        echo '<a href="login.php" id="cerrar-sesion">Cerrar sesion</a>';
+        echo '<a href="index.php" id="cerrar-sesion">Cerrar sesion</a>';
         echo '</div>';
         $enlace = mysqli_connect("127.0.0.1","root","", "bduca");
         $tema = $_POST["tema"];

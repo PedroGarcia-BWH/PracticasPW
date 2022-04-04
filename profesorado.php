@@ -97,7 +97,7 @@
             echo '<div id="head">';
             echo '<h3>Bienvenido, '.$nombre .' '. $apellido;
             echo '</h3>';
-            echo '<a href="login.php" id="cerrar-sesion">Cerrar sesion</a>';
+            echo '<a href="index.php" id="cerrar-sesion">Cerrar sesion</a>';
             echo '</div>';
         ?>
     <h1> Zona de profesorado</h1>

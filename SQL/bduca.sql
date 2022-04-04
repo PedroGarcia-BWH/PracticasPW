@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-03-2022 a las 10:51:30
+-- Tiempo de generación: 04-04-2022 a las 21:16:35
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -127,8 +127,8 @@ CREATE TABLE `examen` (
 INSERT INTO `examen` (`id_examen`, `id_tema`, `id_alumno`, `calificacion`, `fecha`) VALUES
 (1, 1, 1, 7.5, '2022-03-22'),
 (2, 3, 0, 4, '2022-03-15'),
-(3, 2, 1, NULL, '2022-03-31'),
-(4, 4, 1, NULL, '2022-04-01');
+(3, 4, 1, 10, '2022-03-31'),
+(4, 2, 1, NULL, '2022-04-01');
 
 -- --------------------------------------------------------
 
@@ -158,7 +158,7 @@ INSERT INTO `grado` (`id_grado`, `id_centro`, `nombre_grado`) VALUES
 CREATE TABLE `preguntaexamen` (
   `id_examen` tinyint(3) UNSIGNED NOT NULL,
   `id_pregunta` tinyint(3) UNSIGNED NOT NULL,
-  `respuesta` char(1) NOT NULL
+  `respuesta` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -166,9 +166,8 @@ CREATE TABLE `preguntaexamen` (
 --
 
 INSERT INTO `preguntaexamen` (`id_examen`, `id_pregunta`, `respuesta`) VALUES
-(4, 1, ''),
-(4, 2, ''),
-(4, 3, '');
+(3, 1, '1'),
+(3, 2, '4');
 
 -- --------------------------------------------------------
 
@@ -223,7 +222,7 @@ CREATE TABLE `usuario` (
   `apellido` varchar(50) NOT NULL,
   `dni` varchar(10) NOT NULL,
   `correo` varchar(50) NOT NULL,
-  `passwd` varchar(50) NOT NULL,
+  `passwd` varchar(200) NOT NULL,
   `tipo` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -232,9 +231,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellido`, `dni`, `correo`, `passwd`, `tipo`) VALUES
-(1, 'Jose', 'Bautista Lazar', '58574796Y', '', '', 1),
-(2, 'Nicolas', 'Priego Cadenas', '94493273G', '', '', 2),
-(3, 'Laura', 'Muriel Arcos', '40714384Z', '', '', 2);
+(1, 'Jose', 'Bautista Lazar', '58574796Y', 'jose@uca.es', '$2y$10$0ymUWHE/39VKYvxwYIvaxukq562QDIyQJ/EvNRBE.jcLWxhWCAtj2', 1),
+(2, 'Nicolas', 'Priego Cadenas', '94493273G', 'nicolas@uca.es', '$2y$10$0ymUWHE/39VKYvxwYIvaxukq562QDIyQJ/EvNRBE.jcLWxhWCAtj2', 2),
+(3, 'Laura', 'Muriel Arcos', '40714384Z', 'laura@uca.es', '$2y$10$0ymUWHE/39VKYvxwYIvaxukq562QDIyQJ/EvNRBE.jcLWxhWCAtj2', 2);
 
 --
 -- Índices para tablas volcadas
