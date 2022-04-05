@@ -90,7 +90,7 @@
                 }
 
                 $preguntasExamenLocal = [];
-                for($numeroPreguntasExamenLocal = 1; $numeroPreguntasExamenLocal <= 2; $numeroPreguntasExamenLocal++){
+                for($numeroPreguntasExamenLocal = 1; $numeroPreguntasExamenLocal <= 5; $numeroPreguntasExamenLocal++){
                     do{
                         $n = rand(1, $nPreguntas);
                     }while(in_array($n, $preguntasExamenLocal));
