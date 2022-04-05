@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-04-2022 a las 21:16:35
+-- Tiempo de generación: 04-04-2022 a las 22:46:10
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `bduca`
+-- Base de datos: `final`
 --
 
 -- --------------------------------------------------------
@@ -86,7 +86,16 @@ CREATE TABLE `bateriapreguntas` (
 INSERT INTO `bateriapreguntas` (`id_pregunta`, `id_tema`, `pregunta`, `opcion1`, `opcion2`, `opcion3`, `opcion4`, `correcta`) VALUES
 (1, 4, '¿Qué significan las siglas MVC?', 'Modelo-Vista-Controlador', 'Maquina-Virtual-Controlada', 'Modelo-Virtual-Condicionada', 'Maquina-Vista-Controlador', '1'),
 (2, 4, '¿Cuáles de estas carpetas no pertenecen a los proy', 'app', 'config', 'database', 'debug', '4'),
-(3, 4, '¿Dónde se definen las rutas de nuestra aplicación ', 'main/web.php', 'routes/web.php', 'routes/index.php', 'routes.index.php', '2');
+(3, 4, '¿Dónde se definen las rutas de nuestra aplicación ', 'main/web.php', 'routes/web.php', 'routes/index.php', 'routes.index.php', '2'),
+(4, 1, '¿Cómo se introduce un fragmento de codigo php', '<php> </php>', '<?php> </php>', '<?php ?>', '<php ?>', '3'),
+(5, 1, '¿Cómo se introduce un fragmento de codigo php', '<php> </php>', '<?php> </php>', '<?php ?>', '<php ?>', '3'),
+(6, 1, 'Requisitos para instalar CodeIgniter', 'PHP 5', 'Visual Studio Code', 'Python', 'Aprobar ednl', '1'),
+(7, 1, '¿En qué casos usamos el operador @', 'Declarar variables', 'Declarar constantes', 'Llamadas a constructor', 'Control de errores', '4'),
+(8, 1, '¿Cuáles de los siguientes son tipos de inputs?', 'Select', 'Radio', 'Text', 'Todas son correctas', '4'),
+(9, 1, '¿Qué tenemos que usar para acceder a los métodos de la clase padre?', 'parent->', 'father::', 'parent::', 'no es necesario nada', '3'),
+(10, 1, '¿Cómo se crea una cookie?', 'setcookie(id, valor)', '$_COOKIE[id] = valor', 'cookie(id, valor)', 'set $_COOKIE[id] = valor', '1'),
+(11, 1, '¿Cuál es la diferencia entre GET y POST?', 'No existe diferencia', 'El manejo de seguridad de los datos', 'eficiencia', 'tipo de dato', '2'),
+(12, 1, '¿Cuál de estas propiedades son correctas', 'versátil, dificultad de instalación y usa MVC', 'versátil, facilidad de instalación y usa MVC', 'versátil, facilidad de instalacion y lentitud', 'Ninguna es correcta', '2');
 
 -- --------------------------------------------------------
 
@@ -330,7 +339,7 @@ ALTER TABLE `asignatura`
 -- AUTO_INCREMENT de la tabla `bateriapreguntas`
 --
 ALTER TABLE `bateriapreguntas`
-  MODIFY `id_pregunta` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pregunta` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `centro`
@@ -393,39 +402,10 @@ ALTER TABLE `bateriapreguntas`
   ADD CONSTRAINT `bateriapreguntas_ibfk_1` FOREIGN KEY (`id_tema`) REFERENCES `tema` (`id_tema`);
 
 --
--- Filtros para la tabla `examen`
---
-ALTER TABLE `examen`
-  ADD CONSTRAINT `examen_ibfk_1` FOREIGN KEY (`id_tema`) REFERENCES `tema` (`id_tema`),
-  ADD CONSTRAINT `examen_ibfk_2` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Filtros para la tabla `grado`
 --
 ALTER TABLE `grado`
   ADD CONSTRAINT `grado_ibfk_1` FOREIGN KEY (`id_centro`) REFERENCES `centro` (`id_centro`);
-
---
--- Filtros para la tabla `preguntaexamen`
---
-ALTER TABLE `preguntaexamen`
-  ADD CONSTRAINT `preguntaexamen_ibfk_1` FOREIGN KEY (`id_examen`) REFERENCES `examen` (`id_examen`),
-  ADD CONSTRAINT `preguntaexamen_ibfk_2` FOREIGN KEY (`id_examen`) REFERENCES `examen` (`id_examen`),
-  ADD CONSTRAINT `preguntaexamen_ibfk_3` FOREIGN KEY (`id_pregunta`) REFERENCES `bateriapreguntas` (`id_pregunta`),
-  ADD CONSTRAINT `preguntaexamen_ibfk_4` FOREIGN KEY (`id_examen`) REFERENCES `examen` (`id_examen`),
-  ADD CONSTRAINT `preguntaexamen_ibfk_5` FOREIGN KEY (`id_examen`) REFERENCES `examen` (`id_examen`);
-
---
--- Filtros para la tabla `profesor`
---
-ALTER TABLE `profesor`
-  ADD CONSTRAINT `profesor_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
-
---
--- Filtros para la tabla `tema`
---
-ALTER TABLE `tema`
-  ADD CONSTRAINT `tema_ibfk_1` FOREIGN KEY (`id_asignatura`) REFERENCES `asignatura` (`id_asig`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
