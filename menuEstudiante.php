@@ -84,8 +84,9 @@
     <body>
         <?php
             //Conexion a base de datos
+            session_start();
             $conexion = mysqli_connect("127.0.0.1", "root", "", "bduca");
-            $id_usuario = 1;
+            $id_usuario = $_SESSION['id_usuario'];
             //Obtener nombre y apellidos del usuario
             $consulta = mysqli_query($conexion, "SELECT * FROM usuario WHERE id_usuario = '".$id_usuario."'");
             $consulta = mysqli_fetch_array($consulta);

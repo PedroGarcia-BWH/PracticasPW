@@ -75,9 +75,10 @@
                 $consulta = mysqli_query($conexion, "SELECT * FROM examen WHERE id_examen = '".$_SESSION['id_examen']."' ");
             }
             $examen = mysqli_fetch_array($consulta);
+            $queryIdPreguntas = mysqli_query($conexion, "SELECT * FROM preguntaexamen WHERE id_examen = '".$_SESSION['id_examen']."'");
             $id_tema = $examen['id_tema'];
             
-            $queryIdPreguntas = mysqli_query($conexion, "SELECT * FROM preguntaexamen WHERE id_examen = '".$_SESSION['id_examen']."'");
+            
             $numPreguntas = mysqli_num_rows($queryIdPreguntas);
 
 
@@ -144,7 +145,7 @@
                 mysqli_query($conexion, "UPDATE examen SET calificacion = $calificacion WHERE id_examen = '".$_SESSION['id_examen']."'");
                 unset($_POST['respuesta']);
 
-                header('Location: ./finExamen.php');
+                header('Location: /finExamen.php');
             }
         ?>
     </body>
