@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-04-2022 a las 22:46:10
+-- Tiempo de generación: 05-04-2022 a las 16:44:12
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `final`
+-- Base de datos: `bduca`
 --
 
 -- --------------------------------------------------------
@@ -71,11 +71,11 @@ INSERT INTO `asignatura` (`id_asig`, `id_profesor`, `nombre_asig`, `id_grado`) V
 CREATE TABLE `bateriapreguntas` (
   `id_pregunta` tinyint(3) UNSIGNED NOT NULL,
   `id_tema` tinyint(3) UNSIGNED NOT NULL,
-  `pregunta` varchar(200) NOT NULL,
-  `opcion1` varchar(50) NOT NULL,
-  `opcion2` varchar(50) NOT NULL,
-  `opcion3` varchar(50) NOT NULL,
-  `opcion4` varchar(50) NOT NULL,
+  `pregunta` varchar(1000) NOT NULL,
+  `opcion1` varchar(500) NOT NULL,
+  `opcion2` varchar(500) NOT NULL,
+  `opcion3` varchar(500) NOT NULL,
+  `opcion4` varchar(500) NOT NULL,
   `correcta` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -85,17 +85,16 @@ CREATE TABLE `bateriapreguntas` (
 
 INSERT INTO `bateriapreguntas` (`id_pregunta`, `id_tema`, `pregunta`, `opcion1`, `opcion2`, `opcion3`, `opcion4`, `correcta`) VALUES
 (1, 4, '¿Qué significan las siglas MVC?', 'Modelo-Vista-Controlador', 'Maquina-Virtual-Controlada', 'Modelo-Virtual-Condicionada', 'Maquina-Vista-Controlador', '1'),
-(2, 4, '¿Cuáles de estas carpetas no pertenecen a los proy', 'app', 'config', 'database', 'debug', '4'),
-(3, 4, '¿Dónde se definen las rutas de nuestra aplicación ', 'main/web.php', 'routes/web.php', 'routes/index.php', 'routes.index.php', '2'),
+(2, 4, '¿Cuáles de estas carpetas no pertenecen a los proyectos en Laravel?', 'app', 'config', 'database', 'debug', '4'),
+(3, 4, '¿Dónde se definen las rutas de nuestra aplicación en Laravel?', 'main/web.php', 'routes/web.php', 'routes/index.php', 'routes.index.php', '2'),
 (4, 1, '¿Cómo se introduce un fragmento de codigo php', '<php> </php>', '<?php> </php>', '<?php ?>', '<php ?>', '3'),
-(5, 1, '¿Cómo se introduce un fragmento de codigo php', '<php> </php>', '<?php> </php>', '<?php ?>', '<php ?>', '3'),
-(6, 1, 'Requisitos para instalar CodeIgniter', 'PHP 5', 'Visual Studio Code', 'Python', 'Aprobar ednl', '1'),
-(7, 1, '¿En qué casos usamos el operador @', 'Declarar variables', 'Declarar constantes', 'Llamadas a constructor', 'Control de errores', '4'),
-(8, 1, '¿Cuáles de los siguientes son tipos de inputs?', 'Select', 'Radio', 'Text', 'Todas son correctas', '4'),
-(9, 1, '¿Qué tenemos que usar para acceder a los métodos de la clase padre?', 'parent->', 'father::', 'parent::', 'no es necesario nada', '3'),
-(10, 1, '¿Cómo se crea una cookie?', 'setcookie(id, valor)', '$_COOKIE[id] = valor', 'cookie(id, valor)', 'set $_COOKIE[id] = valor', '1'),
-(11, 1, '¿Cuál es la diferencia entre GET y POST?', 'No existe diferencia', 'El manejo de seguridad de los datos', 'eficiencia', 'tipo de dato', '2'),
-(12, 1, '¿Cuál de estas propiedades son correctas', 'versátil, dificultad de instalación y usa MVC', 'versátil, facilidad de instalación y usa MVC', 'versátil, facilidad de instalacion y lentitud', 'Ninguna es correcta', '2');
+(5, 1, 'Requisitos para instalar CodeIgniter', 'PHP 5', 'Visual Studio Code', 'Python', 'Aprobar ednl', '1'),
+(6, 1, '¿En qué casos usamos el operador @?', 'Declarar variables', 'Declarar constantes', 'Llamadas a constructor', 'Control de errores', '4'),
+(7, 1, '¿Cuáles de los siguientes son tipos de inputs?', 'Select', 'Radio', 'Text', 'Todas son correctas', '4'),
+(8, 1, '¿Qué tenemos que usar para acceder a los métodos de la clase padre?', 'parent->', 'father::', 'parent::', 'no es necesario nada', '3'),
+(9, 1, '¿Cómo se crea una cookie?', 'setcookie(id, valor)', '$_COOKIE[id] = valor', 'cookie(id, valor)', 'set $_COOKIE[id] = valor', '1'),
+(10, 1, '¿Cuál es la diferencia entre GET y POST?', 'No existe diferencia', 'El manejo de seguridad de los datos', 'eficiencia', 'tipo de dato', '2'),
+(11, 1, '¿Cuál de estas propiedades son correctas?', 'versátil, dificultad de instalación y usa MVC', 'versátil, facilidad de instalación y usa MVC', 'versátil, facilidad de instalacion y lentitud', 'Ninguna es correcta', '2');
 
 -- --------------------------------------------------------
 
@@ -134,10 +133,10 @@ CREATE TABLE `examen` (
 --
 
 INSERT INTO `examen` (`id_examen`, `id_tema`, `id_alumno`, `calificacion`, `fecha`) VALUES
-(1, 1, 1, 7.5, '2022-03-22'),
+(1, 1, 1, NULL, '2022-04-05'),
 (2, 3, 0, 4, '2022-03-15'),
 (3, 4, 1, 10, '2022-03-31'),
-(4, 2, 1, NULL, '2022-04-01');
+(4, 2, 1, NULL, '2022-04-06');
 
 -- --------------------------------------------------------
 
@@ -169,14 +168,6 @@ CREATE TABLE `preguntaexamen` (
   `id_pregunta` tinyint(3) UNSIGNED NOT NULL,
   `respuesta` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `preguntaexamen`
---
-
-INSERT INTO `preguntaexamen` (`id_examen`, `id_pregunta`, `respuesta`) VALUES
-(3, 1, '1'),
-(3, 2, '4');
 
 -- --------------------------------------------------------
 
@@ -214,7 +205,7 @@ CREATE TABLE `tema` (
 --
 
 INSERT INTO `tema` (`id_tema`, `nombre_tema`, `id_asignatura`) VALUES
-(1, 'Paradigma de la POO', 1),
+(1, 'Programación en PHP', 1),
 (2, 'Polimorfismo', 1),
 (3, 'Introduccion PHP', 2),
 (4, 'Frameworks', 2);
@@ -339,7 +330,7 @@ ALTER TABLE `asignatura`
 -- AUTO_INCREMENT de la tabla `bateriapreguntas`
 --
 ALTER TABLE `bateriapreguntas`
-  MODIFY `id_pregunta` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_pregunta` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `centro`

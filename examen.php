@@ -145,7 +145,7 @@
                 mysqli_query($conexion, "UPDATE examen SET calificacion = $calificacion WHERE id_examen = '".$_SESSION['id_examen']."'");
                 unset($_POST['respuesta']);
 
-                header('Location: /finExamen.php');
+                header('Location: finExamen.php');
             }
         ?>
     </body>
