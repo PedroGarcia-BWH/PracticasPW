@@ -407,6 +407,24 @@ ALTER TABLE `bateriapreguntas`
 --
 ALTER TABLE `grado`
   ADD CONSTRAINT `grado_ibfk_1` FOREIGN KEY (`id_centro`) REFERENCES `centro` (`id_centro`);
+
+--
+-- Filtros para la tabla `preguntaexamen`
+--
+ALTER TABLE `preguntaexamen`
+  ADD CONSTRAINT `preguntaexamen_ibfk_1` FOREIGN KEY (`id_examen`) REFERENCES `examen` (`id_examen`);
+
+--
+-- Filtros para la tabla `profesor`
+--
+ALTER TABLE `profesor`
+  ADD CONSTRAINT `profesor_ibfk_1` FOREIGN KEY (`id_profesor`) REFERENCES `usuario` (`id_usuario`);
+
+--
+-- Filtros para la tabla `tema`
+--
+ALTER TABLE `tema`
+  ADD CONSTRAINT `tema_ibfk_1` FOREIGN KEY (`id_tema`) REFERENCES `examen` (`id_tema`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -76,7 +76,10 @@
                 $queryIdPreguntas = mysqli_query($conexion, "SELECT * FROM preguntaexamen WHERE id_examen = '".$_SESSION['id_examen']."'");
             }
             $examen = mysqli_fetch_array($consulta);
+<<<<<<< HEAD
            
+=======
+>>>>>>> 7cf73e721365661c446f41a766dac5456a0fe9b7
             $id_tema = $examen['id_tema'];
             
             
