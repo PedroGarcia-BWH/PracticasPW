@@ -73,9 +73,10 @@
             }
             else{
                 $consulta = mysqli_query($conexion, "SELECT * FROM examen WHERE id_examen = '".$_SESSION['id_examen']."' ");
+                $queryIdPreguntas = mysqli_query($conexion, "SELECT * FROM preguntaexamen WHERE id_examen = '".$_SESSION['id_examen']."'");
             }
             $examen = mysqli_fetch_array($consulta);
-            $queryIdPreguntas = mysqli_query($conexion, "SELECT * FROM preguntaexamen WHERE id_examen = '".$_SESSION['id_examen']."'");
+           
             $id_tema = $examen['id_tema'];
             
             
@@ -145,7 +146,8 @@
                 mysqli_query($conexion, "UPDATE examen SET calificacion = $calificacion WHERE id_examen = '".$_SESSION['id_examen']."'");
                 unset($_POST['respuesta']);
 
-                header('Location: finExamen.php');
+                echo "<h1>Examen realizado</h1>";
+                echo "<a href='./menuEstudiante.php'>Volver al menú</a>";
             }
         ?>
     </body>

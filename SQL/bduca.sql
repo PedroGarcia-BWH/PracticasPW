@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-04-2022 a las 16:44:12
+-- Tiempo de generación: 05-04-2022 a las 16:58:55
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -87,14 +87,13 @@ INSERT INTO `bateriapreguntas` (`id_pregunta`, `id_tema`, `pregunta`, `opcion1`,
 (1, 4, '¿Qué significan las siglas MVC?', 'Modelo-Vista-Controlador', 'Maquina-Virtual-Controlada', 'Modelo-Virtual-Condicionada', 'Maquina-Vista-Controlador', '1'),
 (2, 4, '¿Cuáles de estas carpetas no pertenecen a los proyectos en Laravel?', 'app', 'config', 'database', 'debug', '4'),
 (3, 4, '¿Dónde se definen las rutas de nuestra aplicación en Laravel?', 'main/web.php', 'routes/web.php', 'routes/index.php', 'routes.index.php', '2'),
-(4, 1, '¿Cómo se introduce un fragmento de codigo php', '<php> </php>', '<?php> </php>', '<?php ?>', '<php ?>', '3'),
-(5, 1, 'Requisitos para instalar CodeIgniter', 'PHP 5', 'Visual Studio Code', 'Python', 'Aprobar ednl', '1'),
-(6, 1, '¿En qué casos usamos el operador @?', 'Declarar variables', 'Declarar constantes', 'Llamadas a constructor', 'Control de errores', '4'),
-(7, 1, '¿Cuáles de los siguientes son tipos de inputs?', 'Select', 'Radio', 'Text', 'Todas son correctas', '4'),
-(8, 1, '¿Qué tenemos que usar para acceder a los métodos de la clase padre?', 'parent->', 'father::', 'parent::', 'no es necesario nada', '3'),
-(9, 1, '¿Cómo se crea una cookie?', 'setcookie(id, valor)', '$_COOKIE[id] = valor', 'cookie(id, valor)', 'set $_COOKIE[id] = valor', '1'),
-(10, 1, '¿Cuál es la diferencia entre GET y POST?', 'No existe diferencia', 'El manejo de seguridad de los datos', 'eficiencia', 'tipo de dato', '2'),
-(11, 1, '¿Cuál de estas propiedades son correctas?', 'versátil, dificultad de instalación y usa MVC', 'versátil, facilidad de instalación y usa MVC', 'versátil, facilidad de instalacion y lentitud', 'Ninguna es correcta', '2');
+(4, 1, 'Requisitos para instalar CodeIgniter', 'PHP 5', 'Visual Studio Code', 'Python', 'Aprobar ednl', '1'),
+(5, 1, '¿En qué casos usamos el operador @?', 'Declarar variables', 'Declarar constantes', 'Llamadas a constructor', 'Control de errores', '4'),
+(6, 1, '¿Cuáles de los siguientes son tipos de inputs?', 'Select', 'Radio', 'Text', 'Todas son correctas', '4'),
+(7, 1, '¿Qué tenemos que usar para acceder a los métodos de la clase padre?', 'parent->', 'father::', 'parent::', 'no es necesario nada', '3'),
+(8, 1, '¿Cómo se crea una cookie?', 'setcookie(id, valor)', '$_COOKIE[id] = valor', 'cookie(id, valor)', 'set $_COOKIE[id] = valor', '1'),
+(9, 1, '¿Cuál es la diferencia entre GET y POST?', 'No existe diferencia', 'El manejo de seguridad de los datos', 'eficiencia', 'tipo de dato', '2'),
+(10, 1, '¿Cuál de estas propiedades son correctas?', 'versátil, dificultad de instalación y usa MVC', 'versátil, facilidad de instalación y usa MVC', 'versátil, facilidad de instalacion y lentitud', 'Ninguna es correcta', '2');
 
 -- --------------------------------------------------------
 
@@ -133,7 +132,7 @@ CREATE TABLE `examen` (
 --
 
 INSERT INTO `examen` (`id_examen`, `id_tema`, `id_alumno`, `calificacion`, `fecha`) VALUES
-(1, 1, 1, NULL, '2022-04-05'),
+(1, 1, 1, 2, '2022-04-05'),
 (2, 3, 0, 4, '2022-03-15'),
 (3, 4, 1, 10, '2022-03-31'),
 (4, 2, 1, NULL, '2022-04-06');
@@ -168,6 +167,17 @@ CREATE TABLE `preguntaexamen` (
   `id_pregunta` tinyint(3) UNSIGNED NOT NULL,
   `respuesta` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `preguntaexamen`
+--
+
+INSERT INTO `preguntaexamen` (`id_examen`, `id_pregunta`, `respuesta`) VALUES
+(1, 1, '3'),
+(1, 3, '2'),
+(1, 4, '4'),
+(1, 5, '3'),
+(1, 6, '2');
 
 -- --------------------------------------------------------
 
